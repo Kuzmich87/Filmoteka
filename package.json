@@ -5,7 +5,9 @@
   "homepage": "https://chornei-olha.github.io/Filmoteka/  ",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /Filmoteka/"
+    "build": "parcel build src/*.html --public-url /Filmoteka/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
   "dependencies": {
     "axios": "^1.1.0",
     "firebase": "^9.11.0",
+    "gh-pages": "^4.0.0",
     "lazysizes": "^5.3.2",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
