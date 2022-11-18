@@ -24,14 +24,11 @@ function onQueueBtnClick(obj) {
   const checkQueue = localStorage.getItem(QUEUE_KEY);
   if (checkQueue) {
     arrQueue = JSON.parse(checkQueue);
-    console.log('onQueueBtnClick ~ arrQueue', arrQueue);
   }
 
   const filmQueue = arrQueue.find(array => {
     array.id === obj.id;
-    console.log(array.id);
   });
-  console.log('onQueueBtnClick ~ filmQueue', filmQueue);
 
   if (filmQueue) {
     return;
@@ -90,6 +87,9 @@ export function searchLocalWatch(obj, btnWatch) {
   try {
     const checkWatch = localStorage.getItem(WATCH_KEY);
     const checkkk = JSON.parse(checkWatch);
+    if (!checkkk) {
+      return;
+    }
     const filmWatched = checkkk.find(array => array.id === obj.id);
     if (filmWatched) {
       btnWatch.classList.remove('btn__watch');
@@ -99,13 +99,16 @@ export function searchLocalWatch(obj, btnWatch) {
       btnWatch.textContent = 'REMOVE FROM WATCHED';
     }
   } catch (error) {
-    // console.log('searchLocalWatch ~ error', error);
+    console.log(error);
   }
 }
 export function searchLocalQueue(obj, btnQueue) {
   try {
     const checkQueue = localStorage.getItem(QUEUE_KEY);
     const checkkk = JSON.parse(checkQueue);
+    if (!checkkk) {
+      return;
+    }
     const filmQueue = checkkk.find(array => array.id === obj.id);
     if (filmQueue) {
       btnQueue.classList.add('active');
@@ -114,13 +117,12 @@ export function searchLocalQueue(obj, btnQueue) {
       btnQueue.textContent = 'REMOVE FROM QUEUE';
     }
   } catch (error) {
-    // console.log('searchLocalQueue ~ error', error);
+    console.log(error);
   }
 }
 
 export function objInfo(obj) {
   const genres_ids = obj.genres_ids;
-  console.log(genres_ids);
 }
 
 export { onWatchedBtnClick, onQueueBtnClick };

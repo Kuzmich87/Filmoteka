@@ -151,7 +151,7 @@ export async function renderMoviesTrending(dataFromServer) {
       }
     );
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
   Loading.remove();
 }

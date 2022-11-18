@@ -56,7 +56,6 @@ function onFilmCardClick(e) {
   /////Данные с Локального хранилища
   let dataLocalStorage = dataInLocalStorage();
 
-  // console.log(dataLocalStorage);
   let changeFilm = dataLocalStorage.find(film => film.id === idImageNumber);
 
   ///////////////Переменные для отрисовки Модалки
@@ -185,14 +184,14 @@ function onCloseBtnClick() {
 }
 
 //Функція закриття по ESC
-function onEscBtnPress(e) {
+export function onEscBtnPress(e) {
   if (e.code === 'Escape') {
     onCloseBtnClick();
   }
 }
 
 //Функція закриття модалки поза межами модалки
-function onBackdropClick(e) {
+export function onBackdropClick(e) {
   if (e.target === backdropEl) {
     onCloseBtnClick();
   }

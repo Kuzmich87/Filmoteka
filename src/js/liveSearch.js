@@ -1,4 +1,3 @@
-import { fetchMoviesTrending } from './API/fetchMoviesTrending';
 import {
   searchLocalQueue,
   searchLocalWatch,
@@ -23,19 +22,24 @@ import {
   backdropEl,
   modalFilm,
   cardListSearch,
-  logOut,
-  cardListItem,
+  searchFilmInput,
+  searchFilmForm,
 } from './refs';
-import { FilmsInLocalStorage } from './usersLib';
+import Notiflix from 'notiflix';
 
-const searchFilmInput = document.querySelector('.header__form-input');
 searchFilmInput.addEventListener('input', liveSearch(searchFilmInput.value));
 
 export async function liveSearch(inputValue) {
-  let searchTopList = null;
+  let searchTopList = [];
   if (inputValue.length > 2) {
     cardListSearch.classList.remove('is-hidden');
     searchTopList = await fetchFilms(inputValue, page);
+    if (searchTopList.length === 0) {
+      Notiflix.Notify.failure(
+        'Search result not successful. Enter the correct movie name and try again.'
+      );
+      return;
+    }
 
     cardListSearch.insertAdjacentHTML(
       'afterbegin',
@@ -43,16 +47,9 @@ export async function liveSearch(inputValue) {
     );
   }
 
-  function clickModal(e) {
-    if (searchTopList) {
-      let clickMovie = searchTopList.find(list => list.id == e.target.id);
-
-      if (localStorage.getItem('Watched')) {
-        watchedStorageLength = FilmsInLocalStorage('Watched').length;
-      }
-      if (localStorage.getItem('Queue')) {
-        queueStorageLength = FilmsInLocalStorage('Queue').length;
-      }
+  async function clickModal(e) {
+    if (searchTopList.length > 0) {
+      let clickMovie = await searchTopList.find(list => list.id == e.target.id);
 
       if (document.querySelector('.film__image') !== null) {
         document.querySelector('.film__image').remove();
@@ -104,6 +101,8 @@ export async function liveSearch(inputValue) {
       });
       cardListSearch.innerHTML = '';
       cardListSearch.classList.add('is-hidden');
+      cardListSearch.removeEventListener('click', clickModal);
+      searchFilmForm.reset();
     }
   }
 

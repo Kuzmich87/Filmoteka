@@ -5,7 +5,6 @@ export const BASE_URL_TO_QUERY_GENRES =
   'https://api.themoviedb.org/3/genre/movie/list?api_key=';
 
 export const LOCAL_KEY_GENRES = 'genresOfFilms';
-// До авторизації
 const refs = {
   toTopBtn: document.querySelector('.btn-to-top'),
   modalBackdrop: document.querySelector('.modal-backdrop'),
@@ -36,6 +35,9 @@ const refs = {
   logOut: document.querySelector('#header-logOut'),
   playSomething: document.querySelector('.header-playsomething'),
   cardListSearch: document.querySelector('[data-index="card-list"]'),
+  searchFilmForm: document.querySelector('.header__form'),
+  searchFilmInput: document.querySelector('.header__form-input'),
+  moviesElement: document.querySelector('.movies'),
 };
 export const {
   toTopBtn,
@@ -67,6 +69,9 @@ export const {
   logOut,
   playSomething,
   cardListSearch,
+  searchFilmForm,
+  searchFilmInput,
+  moviesElement,
 } = refs;
 
 // До футера

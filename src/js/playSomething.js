@@ -18,7 +18,6 @@ import {
 } from './renderMoviesTrending';
 import { addLocal } from './add_local_storage';
 import { playSomething, page, backdropEl, modalFilm } from './refs';
-import { FilmsInLocalStorage } from './usersLib';
 
 let MovieList = null;
 
@@ -31,13 +30,6 @@ async function searchPlaySomething(event) {
   event.preventDefault();
   MovieList = await fetchMoviesTrending(randomPage + 1);
   let randomMovie = getRandomInt(20);
-
-  if (localStorage.getItem('Watched')) {
-    watchedStorageLength = FilmsInLocalStorage('Watched').length;
-  }
-  if (localStorage.getItem('Queue')) {
-    queueStorageLength = FilmsInLocalStorage('Queue').length;
-  }
 
   if (document.querySelector('.film__image') !== null) {
     document.querySelector('.film__image').remove();
